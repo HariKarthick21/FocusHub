@@ -1,5 +1,6 @@
 import re
 import secrets
+import resend
 from datetime import timedelta, date, datetime
 
 from django.conf import settings
@@ -113,8 +114,19 @@ def password_reset_is_verified(request, email):
 
 def send_otp_email(subject, message, recipient):
     try:
+        resend_api_key = getattr(settings, "RESEND_API_KEY", "")
+        if resend_api_key:
+            resend.api_key = resend_api_key
+            response = resend.Emails.send({
+                "from": "FocusHub <onboarding@resend.dev>",
+                "to": [recipient],
+                "subject": subject,
+                "text": message,
+            })
+            return bool(response)
         return send_mail(subject, message, getattr(settings, "DEFAULT_FROM_EMAIL", None), [recipient], fail_silently=False) == 1
-    except Exception:
+    except Exception as e:
+        print(f"Email sending failed: {e}")
         return False
 
 def otp_error_response():

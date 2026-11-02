@@ -1,6 +1,5 @@
 import { getAccessToken, getTabId } from "./authService";
-const API_BASE_URL = "http://localhost:8000/api";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
 const getCookie = (name) => {
   const cookies = document.cookie ? document.cookie.split(";") : [];
   for (const cookie of cookies) {
