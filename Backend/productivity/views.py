@@ -1,6 +1,7 @@
 import re
 import secrets
-import resend
+import requests
+from html import escape
 from datetime import timedelta, date, datetime
 
 from django.conf import settings
@@ -118,9 +119,37 @@ def password_reset_is_verified(request, email):
 
 def send_otp_email(subject, message, recipient):
     try:
-        return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient], fail_silently=False,) == 1
+        api_key = getattr(settings, "SENDLIBERTY_API_KEY", "")
+        if not api_key:
+            print("Sendliberty API key is missing.")
+            return False
+        response = requests.post(
+            "https://sendliberty.com/api/send",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "from": f"FocusHub <{settings.EMAIL_HOST_USER}>",
+                "to": recipient,
+                "subject": subject,
+                "text": message,
+                "html": f"<div>{escape(message).replace(chr(10), '<br>')}</div>",
+            },
+            timeout=20,
+        )
+        if response.status_code == 200:
+            return True
+        print(
+            f"Sendliberty error: HTTP {response.status_code} - "
+            f"{response.text[:1000]}"
+        )
+        return False
+    except requests.RequestException as e:
+        print(f"Sendliberty connection failed: {e}")
+        return False
     except Exception as e:
-        print(f"Gmail SMTP email sending failed: {e}")
+        print(f"Email sending failed: {e}")
         return False
 
 def otp_error_response():

@@ -109,6 +109,7 @@ DEFAULT_FROM_EMAIL = config(
     default=EMAIL_HOST_USER or "onboarding@resend.dev"
 )
 RESEND_API_KEY = config("RESEND_API_KEY", default="")
+SENDLIBERTY_API_KEY = config("SENDLIBERTY_API_KEY", default="")
 
 FRONTEND_URL = config(
     "FRONTEND_URL",
