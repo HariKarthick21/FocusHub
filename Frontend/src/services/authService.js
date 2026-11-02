@@ -45,7 +45,7 @@ export const claimActiveTabSession = async (takeover = false) => {
     return result;
 };
 
-export const releaseActiveTabSession = () => {
+export const releaseActiveTabSession = async () => {
     const refresh = getRefreshToken();
     const tabId = sessionStorage.getItem(TAB_KEY);
 
@@ -54,29 +54,41 @@ export const releaseActiveTabSession = () => {
         return;
     }
 
-    const csrfToken = getCookie("csrftoken");
+    try {
+        const csrfResponse = await fetch(`${API_BASE_URL}/csrf/`, {
+            method: "GET",
+            credentials: "include",
+        });
 
-    if (!csrfToken) {
-        console.warn("FocusHub release skipped: CSRF token unavailable.");
-        return;
-    }
+        if (!csrfResponse.ok) {
+            console.warn("FocusHub release skipped: unable to obtain CSRF token.");
+            return;
+        }
 
-    fetch(`${API_BASE_URL}/auth/release-tab/`, {
-        method: "POST",
-        keepalive: true,
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": csrfToken,
-            "X-FocusHub-Tab": tabId,
-        },
-        body: new URLSearchParams({
-            refresh,
-            tab_id: tabId,
-        }),
-    }).catch(error => {
+        const csrfData = await csrfResponse.json();
+
+        if (!csrfData.csrfToken) {
+            console.warn("FocusHub release skipped: CSRF token unavailable.");
+            return;
+        }
+
+        await fetch(`${API_BASE_URL}/auth/release-tab/`, {
+            method: "POST",
+            keepalive: true,
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": csrfData.csrfToken,
+                "X-FocusHub-Tab": tabId,
+            },
+            body: new URLSearchParams({
+                refresh,
+                tab_id: tabId,
+            }),
+        });
+    } catch (error) {
         console.error("FocusHub tab release failed:", error);
-    });
+    }
 };
 
 export const sendActiveTabHeartbeat = async () => {
