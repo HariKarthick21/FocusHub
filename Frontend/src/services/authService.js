@@ -124,19 +124,47 @@ const getCookie = (name) => {
 const request = async (endpoint, options = {}) => {
     try {
         const method = (options.method || "GET").toUpperCase();
-        const headers = { "X-FocusHub-Tab": getTabId(), ...options.headers };
-        if (options.body !== undefined && !headers["Content-Type"]) headers["Content-Type"] = "application/json";
-        if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
-            await fetch(`${API_BASE_URL}/csrf/`, { method: "GET", credentials: "include" });
-            const csrfToken = getCookie("csrftoken");
-            if (csrfToken) headers["X-CSRFToken"] = csrfToken;
+        const headers = {
+            "X-FocusHub-Tab": getTabId(),
+            ...options.headers,
+        };
+        if (options.body !== undefined && !headers["Content-Type"]) {
+            headers["Content-Type"] = "application/json";
         }
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, { ...options, method, credentials: "include", headers });
-        const data = response.headers.get("content-type")?.includes("application/json") ? await response.json() : null;
+        if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+            const csrfResponse = await fetch(`${API_BASE_URL}/csrf/`, {
+                method: "GET",
+                credentials: "include",
+            });
+            if (!csrfResponse.ok) {
+                return {
+                    status: csrfResponse.status,
+                    data: { error: "Unable to obtain CSRF token." },
+                };
+            }
+            const csrfData = await csrfResponse.json();
+            if (!csrfData.csrfToken) {
+                return {
+                    status: 403,
+                    data: { error: "CSRF token unavailable." },
+                };
+            }
+            headers["X-CSRFToken"] = csrfData.csrfToken;
+        }
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+            ...options,
+            method,
+            credentials: "include",
+            headers,
+        });
+        const data = response.headers.get("content-type") ?.includes("application/json") ? await response.json() : null;
         return { status: response.status, data };
     } catch (error) {
         console.error("FocusHub API request failed:", error);
-        return { status: 0, data: { error: "Unable to connect to the FocusHub server." } };
+        return {
+            status: 0,
+            data: { error: "Unable to connect to the FocusHub server." },
+        };
     }
 };
 

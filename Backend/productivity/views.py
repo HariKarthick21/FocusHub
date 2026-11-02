@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.middleware.csrf import get_token
 from django.db import transaction
 from django.http import JsonResponse
 from django.utils import timezone
@@ -40,7 +41,10 @@ class CsrfProtectedAPIView(APIView):
 
 @ensure_csrf_cookie
 def csrf_token_view(request):
-    return JsonResponse({"detail": "CSRF cookie set."})
+    return JsonResponse({
+        "detail": "CSRF cookie set.",
+        "csrfToken": get_token(request),
+    })
 
 # ---------------------------------------------------------------------
 # Csrf and Authetication Protection
