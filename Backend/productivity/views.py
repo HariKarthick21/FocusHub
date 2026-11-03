@@ -686,7 +686,7 @@ class CardLockOTPRequestView(AuthenticatedCsrfProtectedAPIView):
         return Response(
             {
                 "message": (
-                    "Card Lock recovery OTP sent to your registered email."
+                    "Card Lock recovery OTP sent to your registered email or spam."
                 ),
                 "email": email,
                 "expires_in": OTP_LIFETIME_MINUTES * 60,

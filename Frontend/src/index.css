@@ -293,7 +293,7 @@ select {
     filter var(--transition);
 }
 
-.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.auth-password-toggle):not(.register-otp-button) {
+.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.fh-calendar-title-button):not(.fh-calendar-option):not(.auth-password-toggle):not(.register-otp-button) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -316,22 +316,22 @@ select {
     filter var(--transition);
 }
 
-.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.auth-password-toggle):hover:not(:disabled) {
+.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.fh-calendar-title-button):not(.fh-calendar-option):not(.auth-password-toggle):not(.register-otp-button):hover:not(:disabled) {
   transform: translateY(-2px);
   filter: brightness(1.04);
   box-shadow: 0 8px 24px rgba(212, 175, 55, 0.17);
 }
 
-.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.auth-password-toggle):active:not(:disabled) {
+.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.fh-calendar-title-button):not(.fh-calendar-option):not(.auth-password-toggle):not(.register-otp-button):active:not(:disabled) {
   transform: translateY(0);
 }
 
-.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.auth-password-toggle):focus-visible {
+.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.fh-calendar-title-button):not(.fh-calendar-option):not(.auth-password-toggle):not(.register-otp-button):focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 4px;
 }
 
-.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.auth-password-toggle):disabled {
+.auth-card button:not(.fh-calendar-trigger):not(.fh-calendar-navigation button):not(.fh-calendar-day):not(.fh-calendar-footer button):not(.fh-calendar-title-button):not(.fh-calendar-option):not(.auth-password-toggle):not(.register-otp-button):disabled {
   opacity: 0.55;
   cursor: not-allowed;
   box-shadow: none;
@@ -6966,6 +6966,87 @@ select {
   color: var(--text-primary);
   font-size: 15px;
   font-weight: 750;
+}
+
+.fh-calendar-title-button {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.fh-calendar-title-button:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-color: var(--primary-border);
+}
+
+.fh-calendar-title-button:active {
+    background: var(--primary-soft);
+    transform: scale(0.97);
+}
+
+.fh-calendar-title-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.fh-calendar-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 12px;
+
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+.fh-calendar-option:hover {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-color: var(--primary-border);
+}
+
+.fh-calendar-option.is-today {
+    border-color: var(--accent-border);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.fh-calendar-option.is-selected {
+    background: var(--primary);
+    color: #FFFFFF;
+    border-color: var(--primary);
+    font-weight: 600;
+}
+
+.fh-calendar-option.is-selected.is-today {
+    background: var(--primary-dark);
+    color: var(--accent-light);
+    border-color: var(--accent);
+}
+
+.fh-calendar-option:active {
+    transform: scale(0.96);
+}
+
+.fh-calendar-option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 .fh-calendar-subtitle {
