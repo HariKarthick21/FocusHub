@@ -10123,53 +10123,55 @@ select {
   }
 
   /* CustomCalendar */
- .fh-calendar-trigger {
-    min-height: 44px;
-    padding: 10px 12px;
-    font-size: 13px;
+  .fh-calendar-trigger {
+    min-height: 42px;
+    gap: 8px;
+    padding: 9px 10px;
+    font-size: 12px;
   }
 
   .fh-calendar-popup {
-    width: min(350px, calc(100vw - 32px)) !important;
-    max-height: min(420px, calc(100dvh - 32px)) !important;
-    padding: 14px;
+    width: min(330px, calc(100vw - 28px)) !important;
+    max-height: min(390px, calc(100dvh - 28px)) !important;
+    padding: 12px;
+    border-radius: var(--radius-md);
   }
 
   .fh-calendar-header {
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 14px;
   }
 
   .fh-calendar-month {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .fh-calendar-subtitle {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .fh-calendar-navigation {
-    gap: 6px;
+    gap: 5px;
   }
 
   .fh-calendar-navigation button {
-    width: 32px;
-    height: 32px;
-    font-size: 22px;
+    width: 30px;
+    height: 30px;
+    font-size: 21px;
   }
 
   .fh-calendar-weekdays,
   .fh-calendar-days {
-    gap: 4px;
+    gap: 3px;
   }
 
   .fh-calendar-weekdays {
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .fh-calendar-weekdays > div {
-    height: 28px;
-    font-size: 11px;
+    height: 25px;
+    font-size: 10px;
   }
 
   .fh-calendar-day,
@@ -10178,56 +10180,52 @@ select {
   }
 
   .fh-calendar-days .fh-calendar-day {
-    border-radius: 8px !important;
-    font-size: 12px !important;
+    border-radius: 7px !important;
+    font-size: 11px !important;
+  }
+
+  .fh-calendar-popup {
+    padding: 12px;
   }
 
   .fh-calendar-selection-grid {
-    gap: 8px;
+    gap: 6px;
   }
 
   .fh-calendar-selection-grid .fh-calendar-option {
-    min-height: 40px;
-    padding: 8px 4px;
-    font-size: 13px;
-  }
-
-  .fh-calendar-month-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .fh-calendar-year-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 36px;
+    font-size: 12px;
+    padding: 6px 2px;
   }
 
   .fh-calendar-footer {
-    gap: 9px;
-    margin-top: 12px;
-    padding-top: 10px;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 9px;
   }
 
   .fh-calendar-footer button {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .account-calendar-wrapper {
-    gap: 9px;
+    gap: 8px;
   }
 
   .account-calendar-wrapper .fh-calendar-trigger {
     min-height: 44px;
-    padding: 10px 12px;
+    padding: 10px 11px;
     font-size: 13px;
   }
 
   .account-calendar-wrapper .fh-calendar-popup {
-    width: min(350px, calc(100vw - 32px)) !important;
+    width: min(330px, calc(100vw - 28px)) !important;
   }
 
   .auth-card .fh-calendar-trigger {
-    min-height: 44px;
-    padding: 10px 12px;
-    font-size: 13px;
+    min-height: 42px;
+    padding: 9px 10px;
+    font-size: 12px;
   }
 
   /* ProtectedRoute */
