@@ -6996,55 +6996,66 @@ select {
     outline-offset: 3px;
 }
 
-.fh-calendar-option {
+.fh-calendar-selection-grid {
+    display: grid;
+    gap: 9px;
+    width: 100%;
+}
+
+.fh-calendar-month-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fh-calendar-year-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.fh-calendar-selection-grid .fh-calendar-option {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 38px;
-    padding: 8px 12px;
-
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 4px;
     background: var(--bg-tertiary);
     color: var(--text-secondary);
-    border: 1px solid transparent;
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-
     transition: var(--transition);
 }
 
-.fh-calendar-option:hover {
+.fh-calendar-selection-grid .fh-calendar-option:hover {
     background: var(--primary-soft);
     color: var(--primary);
     border-color: var(--primary-border);
 }
 
-.fh-calendar-option.is-today {
+.fh-calendar-selection-grid .fh-calendar-option.is-today {
     border-color: var(--accent-border);
     color: var(--accent);
-    font-weight: 600;
 }
 
-.fh-calendar-option.is-selected {
+.fh-calendar-selection-grid .fh-calendar-option.is-selected {
     background: var(--primary);
     color: #FFFFFF;
     border-color: var(--primary);
-    font-weight: 600;
 }
 
-.fh-calendar-option.is-selected.is-today {
+.fh-calendar-selection-grid .fh-calendar-option.is-selected.is-today {
     background: var(--primary-dark);
     color: var(--accent-light);
     border-color: var(--accent);
 }
 
-.fh-calendar-option:active {
+.fh-calendar-selection-grid .fh-calendar-option:active {
     transform: scale(0.96);
 }
 
-.fh-calendar-option:focus-visible {
+.fh-calendar-selection-grid .fh-calendar-option:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
@@ -10112,55 +10123,53 @@ select {
   }
 
   /* CustomCalendar */
-  .fh-calendar-trigger {
-    min-height: 42px;
-    gap: 8px;
-    padding: 9px 10px;
-    font-size: 12px;
+ .fh-calendar-trigger {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 13px;
   }
 
   .fh-calendar-popup {
-    width: min(330px, calc(100vw - 28px)) !important;
-    max-height: min(390px, calc(100dvh - 28px)) !important;
-    padding: 12px;
-    border-radius: var(--radius-md);
+    width: min(350px, calc(100vw - 32px)) !important;
+    max-height: min(420px, calc(100dvh - 32px)) !important;
+    padding: 14px;
   }
 
   .fh-calendar-header {
-    gap: 8px;
-    margin-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
 
   .fh-calendar-month {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .fh-calendar-subtitle {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .fh-calendar-navigation {
-    gap: 5px;
+    gap: 6px;
   }
 
   .fh-calendar-navigation button {
-    width: 30px;
-    height: 30px;
-    font-size: 21px;
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
   }
 
   .fh-calendar-weekdays,
   .fh-calendar-days {
-    gap: 3px;
+    gap: 4px;
   }
 
   .fh-calendar-weekdays {
-    margin-bottom: 5px;
+    margin-bottom: 6px;
   }
 
   .fh-calendar-weekdays > div {
-    height: 25px;
-    font-size: 10px;
+    height: 28px;
+    font-size: 11px;
   }
 
   .fh-calendar-day,
@@ -10169,38 +10178,56 @@ select {
   }
 
   .fh-calendar-days .fh-calendar-day {
-    border-radius: 7px !important;
-    font-size: 11px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+  }
+
+  .fh-calendar-selection-grid {
+    gap: 8px;
+  }
+
+  .fh-calendar-selection-grid .fh-calendar-option {
+    min-height: 40px;
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+
+  .fh-calendar-month-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .fh-calendar-year-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .fh-calendar-footer {
-    gap: 8px;
-    margin-top: 10px;
-    padding-top: 9px;
+    gap: 9px;
+    margin-top: 12px;
+    padding-top: 10px;
   }
 
   .fh-calendar-footer button {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .account-calendar-wrapper {
-    gap: 8px;
+    gap: 9px;
   }
 
   .account-calendar-wrapper .fh-calendar-trigger {
     min-height: 44px;
-    padding: 10px 11px;
+    padding: 10px 12px;
     font-size: 13px;
   }
 
   .account-calendar-wrapper .fh-calendar-popup {
-    width: min(330px, calc(100vw - 28px)) !important;
+    width: min(350px, calc(100vw - 32px)) !important;
   }
 
   .auth-card .fh-calendar-trigger {
-    min-height: 42px;
-    padding: 9px 10px;
-    font-size: 12px;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 13px;
   }
 
   /* ProtectedRoute */
